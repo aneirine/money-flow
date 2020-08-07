@@ -7,18 +7,18 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "people")
-public class Person {
+@Table(name = "transaction_categories")
+public class TransactionCategory {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String username;
-    private String email;
+    @Column(unique = true)
+    private String name;
 }

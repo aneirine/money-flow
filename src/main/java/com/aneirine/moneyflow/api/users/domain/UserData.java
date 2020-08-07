@@ -1,9 +1,9 @@
-package com.aneirine.moneyflow.entities.api.people.domain;
+package com.aneirine.moneyflow.api.users.domain;
 
 import lombok.Data;
 
 @Data
-public class PeopleData {
+public class UserData {
 
     private String username;
     private String email;
