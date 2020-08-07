@@ -15,6 +15,7 @@ public class TransactionCategoryService {
 
     public TransactionCategoryResponse createTransactionCategory(TransactionCategoryData data){
         TransactionCategory transactionCategory = new TransactionCategory();
+        transactionCategoryRepository
         transactionCategory.setName(data.getName());
 
     }
