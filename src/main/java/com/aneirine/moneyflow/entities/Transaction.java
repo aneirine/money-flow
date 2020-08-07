@@ -27,4 +27,11 @@ public class Transaction {
     @ManyToOne
     private TransactionCategory transactionCategory;
 
+
+    public Transaction(String name, double sum, TransactionType transactionType, TransactionCategory transactionCategory) {
+        this.name = name;
+        this.sum = sum;
+        this.transactionType = transactionType;
+        this.transactionCategory = transactionCategory;
+    }
 }

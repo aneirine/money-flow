@@ -1,8 +1,7 @@
 package com.aneirine.moneyflow.exceptions.handler;
 
 
-
-import com.spectrcorporation.spectrdemo.exceptions.*;
+import com.aneirine.moneyflow.exceptions.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +48,7 @@ public class GenericExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<Object> handleNotFoundException(NotFoundException exception, WebRequest request){
+    public ResponseEntity<Object> handleNotFoundException(NotFoundException exception, WebRequest request) {
         log.warn(exception.getMessage());
         return new ResponseEntity<>(new RestError(NOT_FOUND.value(), exception.getMessage()), NOT_FOUND);
     }
