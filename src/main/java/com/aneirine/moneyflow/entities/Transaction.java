@@ -1,5 +1,6 @@
 package com.aneirine.moneyflow.entities;
 
+import com.aneirine.moneyflow.entities.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,5 +22,9 @@ public class Transaction {
 
     private String name;
     private double sum;
+    private TransactionType transactionType;
+
+    @ManyToOne
+    private TransactionCategory transactionCategory;
 
 }
