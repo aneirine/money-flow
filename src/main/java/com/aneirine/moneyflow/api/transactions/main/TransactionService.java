@@ -35,4 +35,26 @@ public class TransactionService {
         return new TransactionResponse(transactionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND")));
     }
+
+    public TransactionResponse updateTransactionById(long id, TransactionData data) {
+        Transaction transaction = transactionRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND"));
+        TransactionType transactionType = TransactionType.getTransactionTypeByOrdinal(data.getTypeOrdinal());
+        TransactionCategory transactionCategory = transactionCategoryRepository.findById(data.getCategoryId())
+                .orElseThrow(() -> new NotFoundException("TRANSACTION_CATEGORY_NOT_FOUND"));
+
+        transaction.setTransactionType(transactionType);
+        transaction.setTransactionCategory(transactionCategory);
+        transaction.setSum(data.getSum());
+        transaction.setName(data.getName());
+
+        transactionRepository.save(transaction);
+        return new TransactionResponse(transaction);
+    }
+
+    public void deleteTransactionById(long id){
+        Transaction transaction = transactionRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND"));
+        transactionRepository.deleteById(id);
+    }
 }
