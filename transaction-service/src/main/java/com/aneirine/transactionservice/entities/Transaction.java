@@ -1,6 +1,5 @@
-package com.aneirine.moneyflow.entities;
+package com.aneirine.transactionservice.entities;
 
-import com.aneirine.moneyflow.entities.enums.TransactionType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

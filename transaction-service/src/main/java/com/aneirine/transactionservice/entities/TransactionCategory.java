@@ -1,4 +1,4 @@
-package com.aneirine.moneyflow.entities;
+package com.aneirine.transactionservice.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -25,7 +25,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    @OneToMany
-    private List<Transaction> transactionList;
+    @ElementCollection
+    private List<Long> transactionIdList;
 
 }

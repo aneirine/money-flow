@@ -1,4 +1,4 @@
-package com.aneirine.moneyflow.entities.enums;
+package com.aneirine.transactionservice.entities;
 
 import com.aneirine.moneyflow.exceptions.NotFoundException;
 

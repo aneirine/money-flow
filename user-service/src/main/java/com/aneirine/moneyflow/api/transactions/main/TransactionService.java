@@ -5,7 +5,7 @@ import com.aneirine.moneyflow.api.transactions.main.domain.TransactionData;
 import com.aneirine.moneyflow.api.transactions.main.domain.TransactionResponse;
 import com.aneirine.moneyflow.entities.Transaction;
 import com.aneirine.moneyflow.entities.TransactionCategory;
-import com.aneirine.moneyflow.entities.enums.TransactionType;
+import com.aneirine.transactionservice.entities.enums.TransactionType;
 import com.aneirine.moneyflow.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

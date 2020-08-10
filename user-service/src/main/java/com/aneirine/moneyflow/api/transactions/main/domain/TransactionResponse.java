@@ -1,7 +1,7 @@
 package com.aneirine.moneyflow.api.transactions.main.domain;
 
 import com.aneirine.moneyflow.entities.Transaction;
-import com.aneirine.moneyflow.entities.enums.TransactionType;
+import com.aneirine.transactionservice.entities.enums.TransactionType;
 import lombok.Data;
 
 @Data
