@@ -2,12 +2,14 @@ package com.aneirine.transactionservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-public class MoneyFlowApplication {
+@EnableEurekaClient
+public class TransactionServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MoneyFlowApplication.class, args);
+		SpringApplication.run(TransactionServiceApplication.class, args);
 	}
 
 }
