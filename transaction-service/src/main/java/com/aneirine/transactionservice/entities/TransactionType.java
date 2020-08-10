@@ -1,6 +1,7 @@
 package com.aneirine.transactionservice.entities;
 
-import com.aneirine.moneyflow.exceptions.NotFoundException;
+
+import com.aneirine.transactionservice.exceptions.NotFoundException;
 
 public enum TransactionType {
     DAY, WEEK, MONTH;

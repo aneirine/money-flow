@@ -1,6 +1,6 @@
-package com.aneirine.moneyflow.api.transactions.category.domain;
+package com.aneirine.transactionservice.api.transactions.category.domain;
 
-import com.aneirine.moneyflow.entities.TransactionCategory;
+import com.aneirine.transactionservice.entities.TransactionCategory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

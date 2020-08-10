@@ -1,4 +1,4 @@
-package com.aneirine.moneyflow.api.transactions.main.domain;
+package com.aneirine.transactionservice.api.transactions.main.domain;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
-package com.aneirine.moneyflow.api.transactions.category;
+package com.aneirine.transactionservice.api.transactions.category;
 
-import com.aneirine.moneyflow.api.transactions.category.domain.TransactionCategoryData;
+import com.aneirine.transactionservice.api.transactions.category.domain.TransactionCategoryData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

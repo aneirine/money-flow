@@ -1,12 +1,12 @@
-package com.aneirine.moneyflow.api.transactions.main;
+package com.aneirine.transactionservice.api.transactions.main;
 
-import com.aneirine.moneyflow.api.transactions.category.TransactionCategoryRepository;
-import com.aneirine.moneyflow.api.transactions.main.domain.TransactionData;
-import com.aneirine.moneyflow.api.transactions.main.domain.TransactionResponse;
-import com.aneirine.moneyflow.entities.Transaction;
-import com.aneirine.moneyflow.entities.TransactionCategory;
-import com.aneirine.transactionservice.entities.enums.TransactionType;
-import com.aneirine.moneyflow.exceptions.NotFoundException;
+import com.aneirine.transactionservice.api.transactions.category.TransactionCategoryRepository;
+import com.aneirine.transactionservice.api.transactions.main.domain.TransactionData;
+import com.aneirine.transactionservice.api.transactions.main.domain.TransactionResponse;
+import com.aneirine.transactionservice.entities.Transaction;
+import com.aneirine.transactionservice.entities.TransactionCategory;
+import com.aneirine.transactionservice.entities.TransactionType;
+import com.aneirine.transactionservice.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
