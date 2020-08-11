@@ -28,4 +28,12 @@ public class User {
     @ElementCollection
     private List<Long> transactionIdList;
 
+    public void addTransaction(long transactionId){
+        this.transactionIdList.add(transactionId);
+    }
+
+    public void removeTransaction(long transactionId){
+        this.transactionIdList.remove(transactionId);
+    }
+
 }

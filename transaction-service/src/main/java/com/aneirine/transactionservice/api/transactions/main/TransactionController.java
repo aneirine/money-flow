@@ -16,9 +16,10 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createTransaction(@Valid @RequestBody TransactionData data) {
-        return new ResponseEntity(transactionService.createTransaction(data), HttpStatus.CREATED);
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}")
+    public ResponseEntity createTransaction(@Valid @RequestBody TransactionData data,
+                                            @PathVariable("userId") long userId) {
+        return new ResponseEntity(transactionService.createTransaction(data, userId), HttpStatus.CREATED);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{transactionId}")
@@ -26,9 +27,14 @@ public class TransactionController {
         return new ResponseEntity(transactionService.getTransactionById(transactionId), HttpStatus.OK);
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/users/{userId}")
+    public ResponseEntity getTransactionsByUserId(@PathVariable("userId") long userId) {
+        return new ResponseEntity(transactionService.getTransactionsByUserId(userId), HttpStatus.OK);
+    }
+
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{transactionId}")
     public ResponseEntity updateTransactionById(@PathVariable("transactionId") long transactionId,
-                                                        @Valid @RequestBody TransactionData data) {
+                                                @Valid @RequestBody TransactionData data) {
         return new ResponseEntity(transactionService.updateTransactionById(transactionId, data), HttpStatus.OK);
     }
 
