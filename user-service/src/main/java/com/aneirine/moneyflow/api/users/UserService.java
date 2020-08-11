@@ -6,6 +6,8 @@ import com.aneirine.moneyflow.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class UserService {
 
@@ -16,6 +18,7 @@ public class UserService {
         User user = new User();
         user.setEmail(data.getEmail());
         user.setUsername(data.getUsername());
+        user.setTransactionIdList(new ArrayList<>());
         userRepository.save(user);
         return user;
     }
