@@ -14,4 +14,5 @@ public interface UserFeignService {
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions/{transactionId}")
     public ResponseEntity addTransactionToUser(@PathVariable("userId") long userId,
                                                @PathVariable("transactionId") long transactionId);
+
 }

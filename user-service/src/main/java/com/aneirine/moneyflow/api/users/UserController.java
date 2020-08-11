@@ -15,14 +15,20 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createPerson(@RequestBody UserData userData){
+    public ResponseEntity createPerson(@RequestBody UserData userData) {
         return new ResponseEntity(userService.createUser(userData), HttpStatus.OK);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions/{transactionId}")
     public ResponseEntity addTransactionToUser(@PathVariable("userId") long userId,
-                                               @PathVariable("transactionId") long transactionId){
+                                               @PathVariable("transactionId") long transactionId) {
         userService.addTransactionToUser(userId, transactionId);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions")
+    public ResponseEntity getTransactionsIdByUserId(@PathVariable("userId") long userId) {
+        return new ResponseEntity(userService.getTransactionsIdByUserId(userId), HttpStatus.OK);
+
     }
 }
