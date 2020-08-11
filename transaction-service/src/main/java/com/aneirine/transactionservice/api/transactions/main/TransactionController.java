@@ -19,7 +19,7 @@ public class TransactionController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}")
     public ResponseEntity createTransaction(@Valid @RequestBody TransactionData data,
                                             @PathVariable("userId") long userId) {
-        return new ResponseEntity(transactionService.createTransaction(data), HttpStatus.CREATED);
+        return new ResponseEntity(transactionService.createTransaction(data, userId), HttpStatus.CREATED);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{transactionId}")

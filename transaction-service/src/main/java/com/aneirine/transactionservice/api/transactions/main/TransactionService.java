@@ -1,5 +1,6 @@
 package com.aneirine.transactionservice.api.transactions.main;
 
+import com.aneirine.transactionservice.api.feign.UserFeignService;
 import com.aneirine.transactionservice.api.transactions.category.TransactionCategoryRepository;
 import com.aneirine.transactionservice.api.transactions.main.domain.TransactionData;
 import com.aneirine.transactionservice.api.transactions.main.domain.TransactionResponse;
@@ -19,8 +20,11 @@ public class TransactionService {
     @Autowired
     private TransactionCategoryRepository transactionCategoryRepository;
 
+    @Autowired
+    private UserFeignService userFeignService;
 
-    public TransactionResponse createTransaction(TransactionData data) {
+
+    public TransactionResponse createTransaction(TransactionData data, long userId) {
         TransactionType transactionType = TransactionType.getTransactionTypeByOrdinal(data.getTypeOrdinal());
         TransactionCategory transactionCategory = transactionCategoryRepository.findById(data.getCategoryId())
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_CATEGORY_NOT_FOUND"));
@@ -28,6 +32,7 @@ public class TransactionService {
                 data.getName(), data.getSum(), transactionType, transactionCategory
         );
         transactionRepository.save(transaction);
+        userFeignService.addTransactionToUser(userId, transaction.getId());
         return new TransactionResponse(transaction);
     }
 
