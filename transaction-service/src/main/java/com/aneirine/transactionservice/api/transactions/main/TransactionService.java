@@ -9,6 +9,7 @@ import com.aneirine.transactionservice.entities.TransactionCategory;
 import com.aneirine.transactionservice.entities.TransactionType;
 import com.aneirine.transactionservice.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -45,10 +46,10 @@ public class TransactionService {
     }
 
     public List<TransactionResponse> getTransactionsByUserId(long userId) {
-        List<Long> ids = (List<Long>) userFeignService.getTransactionsIdByUserId(userId);
+        ResponseEntity<List<Long>> response = userFeignService.getTransactionsIdByUserId(userId);
         List<TransactionResponse> responses = new ArrayList<>();
 
-        List<Transaction> transactions = transactionRepository.findAllByIdIn(ids);
+        List<Transaction> transactions = transactionRepository.findAllByIdIn(response.getBody());
         for (Transaction temp : transactions) {
             responses.add(new TransactionResponse(temp));
         }
