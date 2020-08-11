@@ -7,6 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -27,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions")
-    public ResponseEntity getTransactionsIdByUserId(@PathVariable("userId") long userId) {
+    public ResponseEntity<List<Long>> getTransactionsIdByUserId(@PathVariable("userId") long userId) {
         return new ResponseEntity(userService.getTransactionsIdByUserId(userId), HttpStatus.OK);
 
     }

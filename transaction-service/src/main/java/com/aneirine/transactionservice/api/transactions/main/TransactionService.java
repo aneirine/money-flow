@@ -11,6 +11,9 @@ import com.aneirine.transactionservice.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TransactionService {
 
@@ -41,6 +44,18 @@ public class TransactionService {
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND")));
     }
 
+    public List<TransactionResponse> getTransactionsByUserId(long userId) {
+        List<Long> ids = (List<Long>) userFeignService.getTransactionsIdByUserId(userId);
+        List<TransactionResponse> responses = new ArrayList<>();
+
+        List<Transaction> transactions = transactionRepository.findAllByIdIn(ids);
+        for (Transaction temp : transactions) {
+            responses.add(new TransactionResponse(temp));
+        }
+
+        return responses;
+    }
+
     public TransactionResponse updateTransactionById(long id, TransactionData data) {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND"));
@@ -57,7 +72,7 @@ public class TransactionService {
         return new TransactionResponse(transaction);
     }
 
-    public void deleteTransactionById(long id){
+    public void deleteTransactionById(long id) {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND"));
         transactionRepository.deleteById(id);
