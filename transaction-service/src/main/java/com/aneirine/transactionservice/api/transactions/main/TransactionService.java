@@ -3,6 +3,7 @@ package com.aneirine.transactionservice.api.transactions.main;
 import com.aneirine.transactionservice.api.feign.UserFeignService;
 import com.aneirine.transactionservice.api.transactions.category.TransactionCategoryRepository;
 import com.aneirine.transactionservice.api.transactions.main.domain.TransactionData;
+import com.aneirine.transactionservice.api.transactions.main.domain.TransactionIdsList;
 import com.aneirine.transactionservice.api.transactions.main.domain.TransactionResponse;
 import com.aneirine.transactionservice.entities.Transaction;
 import com.aneirine.transactionservice.entities.TransactionCategory;
@@ -77,5 +78,9 @@ public class TransactionService {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND"));
         transactionRepository.deleteById(id);
+    }
+
+    public void deleteAllTransactionsByIds(TransactionIdsList data){
+        transactionRepository.deleteAllByIdIn(data.getTransactionIds());
     }
 }

@@ -1,6 +1,7 @@
 package com.aneirine.transactionservice.api.transactions.main;
 
 import com.aneirine.transactionservice.api.transactions.main.domain.TransactionData;
+import com.aneirine.transactionservice.api.transactions.main.domain.TransactionIdsList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,6 +42,12 @@ public class TransactionController {
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{transactionId}")
     public ResponseEntity deleteTransactionById(@PathVariable("transactionId") long transactionId) {
         transactionService.deleteTransactionById(transactionId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteTransactionById(@RequestBody TransactionIdsList data) {
+        transactionService.deleteAllTransactionsByIds(data);
         return new ResponseEntity(HttpStatus.OK);
     }
 
