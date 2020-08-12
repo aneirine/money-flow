@@ -1,6 +1,7 @@
 package com.aneirine.moneyflow;
 
 import com.aneirine.moneyflow.api.users.domain.TransactionIdsList;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @FeignClient(name = "transaction-service")
+@RibbonClient(name = "transaction-service")
 @RequestMapping("/api/transactions")
 public interface TransactionFeignService {
 

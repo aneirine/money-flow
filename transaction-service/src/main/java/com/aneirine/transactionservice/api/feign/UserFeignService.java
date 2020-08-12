@@ -1,5 +1,6 @@
 package com.aneirine.transactionservice.api.feign;
 
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @FeignClient(name = "user-service")
+@RibbonClient(name = "user-service")
 @RequestMapping("/api/users")
 public interface UserFeignService {
 
