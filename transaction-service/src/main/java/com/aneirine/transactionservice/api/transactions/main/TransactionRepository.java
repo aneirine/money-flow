@@ -8,4 +8,6 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
     List<Transaction> findAllByIdIn(List<Long> ids);
+
+    void deleteAllByIdIn(List<Long> ids);
 }
