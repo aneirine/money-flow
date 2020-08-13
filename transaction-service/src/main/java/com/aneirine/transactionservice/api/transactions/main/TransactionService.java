@@ -37,7 +37,7 @@ public class TransactionService {
                 data.getName(), data.getSum(), transactionType, transactionCategory
         );
         transactionRepository.save(transaction);
-        // userFeignService.addTransactionToUser(userId, transaction.getId());
+        userFeignService.addTransactionToUser(userId, transaction.getId());
         return new TransactionResponse(transaction);
     }
 
