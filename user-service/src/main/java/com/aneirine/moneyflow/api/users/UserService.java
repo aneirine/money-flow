@@ -1,6 +1,5 @@
 package com.aneirine.moneyflow.api.users;
 
-import com.aneirine.moneyflow.TransactionFeignService;
 import com.aneirine.moneyflow.api.users.domain.TransactionIdsList;
 import com.aneirine.moneyflow.api.users.domain.UserData;
 import com.aneirine.moneyflow.api.users.domain.UserResponse;
@@ -18,9 +17,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private TransactionFeignService transactionFeignService;
+//
+//    @Autowired
+//    private TransactionFeignService transactionFeignService;
 
     public UserResponse createUser(UserData data) {
         User user = new User();
@@ -68,12 +67,12 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public List<Long> getTransactionsIdByUserId(long userId) {
+    /*public List<Long> getTransactionsIdByUserId(long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
         transactionFeignService.deleteTransactionById(new TransactionIdsList(user.getTransactionIdList()));
         return user.getTransactionIdList();
     }
-
+*/
 
 }
