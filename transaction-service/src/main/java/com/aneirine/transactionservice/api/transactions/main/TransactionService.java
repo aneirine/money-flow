@@ -40,9 +40,9 @@ public class TransactionService {
         return new TransactionResponse(transactionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND")));
     }
-
-  /*  public List<TransactionResponse> getTransactionsByUserId(long userId) {
-     //   ResponseEntity<List<Long>> response = userFeignService.getTransactionsIdByUserId(userId);
+/*
+    public List<TransactionResponse> getTransactionsByUserId(long userId) {
+        ResponseEntity<List<Long>> response = userFeignService.getTransactionsIdByUserId(userId);
         List<TransactionResponse> responses = new ArrayList<>();
 
         List<Transaction> transactions = transactionRepository.findAllByIdIn(response.getBody());
@@ -77,5 +77,10 @@ public class TransactionService {
 
     public void deleteAllTransactionsByIds(TransactionIdsList data) {
         transactionRepository.deleteAllByIdIn(data.getTransactionIds());
+    }
+
+    public Transaction creteTestTransactionWithUserId(long userId) {
+        return new Transaction("testName", (double) userId, TransactionType.DAY,
+        new TransactionCategory());
     }
 }

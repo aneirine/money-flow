@@ -28,7 +28,7 @@ public class TransactionController {
         return new ResponseEntity(transactionService.getTransactionById(transactionId), HttpStatus.OK);
     }
 
-   /* @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/users/{userId}")
+    /*@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/users/{userId}")
     public ResponseEntity getTransactionsByUserId(@PathVariable("userId") long userId) {
         return new ResponseEntity(transactionService.getTransactionsByUserId(userId), HttpStatus.OK);
     }*/
@@ -49,6 +49,11 @@ public class TransactionController {
     public ResponseEntity deleteTransactionById(@RequestBody TransactionIdsList data) {
         transactionService.deleteAllTransactionsByIds(data);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE,path = "/test/{userId}")
+    public ResponseEntity creteTestTransactionWithUserId(@PathVariable("userId") long userId){
+        return new ResponseEntity(transactionService.creteTestTransactionWithUserId(userId), HttpStatus.OK);
     }
 
 }
