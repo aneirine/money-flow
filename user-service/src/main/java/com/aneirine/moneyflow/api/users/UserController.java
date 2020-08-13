@@ -28,6 +28,11 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/test/{userId}")
+    public ResponseEntity getTransactionTest(@PathVariable("userId") long userId){
+        return new ResponseEntity(userService.getTransactionTest(userId), HttpStatus.OK);
+    }
+
   /*  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions")
     public ResponseEntity<List<Long>> getTransactionsIdByUserId(@PathVariable("userId") long userId) {
         return new ResponseEntity(userService.getTransactionsIdByUserId(userId), HttpStatus.OK);

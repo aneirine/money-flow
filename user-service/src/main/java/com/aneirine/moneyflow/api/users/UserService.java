@@ -1,6 +1,6 @@
 package com.aneirine.moneyflow.api.users;
 
-import com.aneirine.moneyflow.api.users.domain.TransactionIdsList;
+import com.aneirine.moneyflow.api.feign.TransactionFeignService;
 import com.aneirine.moneyflow.api.users.domain.UserData;
 import com.aneirine.moneyflow.api.users.domain.UserResponse;
 import com.aneirine.moneyflow.entities.User;
@@ -10,16 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-//
-//    @Autowired
-//    private TransactionFeignService transactionFeignService;
+
+    @Autowired
+    private TransactionFeignService transactionFeignService;
 
     public UserResponse createUser(UserData data) {
         User user = new User();
@@ -52,7 +51,7 @@ public class UserService {
         return new UserResponse(user);
     }
 
-    public void deleteUserById(long id){
+    public void deleteUserById(long id) {
 
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
@@ -65,6 +64,10 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
         user.addTransaction(transactionId);
         userRepository.save(user);
+    }
+
+    public Object getTransactionTest(long userId) {
+        return transactionFeignService.creteTestTransactionWithUserId(userId);
     }
 
     /*public List<Long> getTransactionsIdByUserId(long userId) {
