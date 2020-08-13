@@ -28,9 +28,9 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions")
+  /*  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions")
     public ResponseEntity<List<Long>> getTransactionsIdByUserId(@PathVariable("userId") long userId) {
         return new ResponseEntity(userService.getTransactionsIdByUserId(userId), HttpStatus.OK);
 
-    }
+    }*/
 }
