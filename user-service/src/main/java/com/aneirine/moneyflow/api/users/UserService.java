@@ -1,6 +1,7 @@
 package com.aneirine.moneyflow.api.users;
 
 import com.aneirine.moneyflow.api.feign.TransactionFeignService;
+import com.aneirine.moneyflow.api.users.domain.TransactionIdsList;
 import com.aneirine.moneyflow.api.users.domain.UserData;
 import com.aneirine.moneyflow.api.users.domain.UserResponse;
 import com.aneirine.moneyflow.entities.User;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -52,10 +54,9 @@ public class UserService {
     }
 
     public void deleteUserById(long id) {
-
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
-        //delete all transactions
+        transactionFeignService.deleteAllTransactionsByIds(new TransactionIdsList(user.getTransactionIdList()));
         userRepository.delete(user);
     }
 
@@ -66,16 +67,12 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public Object getTransactionTest(long userId) {
-        return transactionFeignService.creteTestTransactionWithUserId(userId);
-    }
 
-    /*public List<Long> getTransactionsIdByUserId(long userId) {
+    public List<Long> getTransactionsIdByUserId(long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
-        transactionFeignService.deleteTransactionById(new TransactionIdsList(user.getTransactionIdList()));
         return user.getTransactionIdList();
     }
-*/
+
 
 }

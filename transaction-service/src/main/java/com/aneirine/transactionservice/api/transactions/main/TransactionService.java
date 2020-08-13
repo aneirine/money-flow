@@ -1,5 +1,6 @@
 package com.aneirine.transactionservice.api.transactions.main;
 
+import com.aneirine.transactionservice.api.feign.UserFeignService;
 import com.aneirine.transactionservice.api.transactions.category.TransactionCategoryRepository;
 import com.aneirine.transactionservice.api.transactions.main.domain.TransactionData;
 import com.aneirine.transactionservice.api.transactions.main.domain.TransactionIdsList;
@@ -9,7 +10,11 @@ import com.aneirine.transactionservice.entities.TransactionCategory;
 import com.aneirine.transactionservice.entities.TransactionType;
 import com.aneirine.transactionservice.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TransactionService {
@@ -20,9 +25,9 @@ public class TransactionService {
     @Autowired
     private TransactionCategoryRepository transactionCategoryRepository;
 
-   /* @Autowired
+    @Autowired
     private UserFeignService userFeignService;
-*/
+
 
     public TransactionResponse createTransaction(TransactionData data, long userId) {
         TransactionType transactionType = TransactionType.getTransactionTypeByOrdinal(data.getTypeOrdinal());
@@ -40,7 +45,7 @@ public class TransactionService {
         return new TransactionResponse(transactionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND")));
     }
-/*
+
     public List<TransactionResponse> getTransactionsByUserId(long userId) {
         ResponseEntity<List<Long>> response = userFeignService.getTransactionsIdByUserId(userId);
         List<TransactionResponse> responses = new ArrayList<>();
@@ -51,7 +56,7 @@ public class TransactionService {
         }
 
         return responses;
-    }*/
+    }
 
     public TransactionResponse updateTransactionById(long id, TransactionData data) {
         Transaction transaction = transactionRepository.findById(id)
@@ -79,8 +84,5 @@ public class TransactionService {
         transactionRepository.deleteAllByIdIn(data.getTransactionIds());
     }
 
-    public Transaction creteTestTransactionWithUserId(long userId) {
-        return new Transaction("testName", (double) userId, TransactionType.DAY,
-        new TransactionCategory());
-    }
+
 }
