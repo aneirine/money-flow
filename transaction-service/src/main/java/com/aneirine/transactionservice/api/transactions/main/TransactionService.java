@@ -1,6 +1,5 @@
 package com.aneirine.transactionservice.api.transactions.main;
 
-import com.aneirine.transactionservice.api.feign.UserFeignService;
 import com.aneirine.transactionservice.api.transactions.category.TransactionCategoryRepository;
 import com.aneirine.transactionservice.api.transactions.main.domain.TransactionData;
 import com.aneirine.transactionservice.api.transactions.main.domain.TransactionIdsList;
@@ -10,11 +9,7 @@ import com.aneirine.transactionservice.entities.TransactionCategory;
 import com.aneirine.transactionservice.entities.TransactionType;
 import com.aneirine.transactionservice.exceptions.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class TransactionService {
@@ -25,9 +20,9 @@ public class TransactionService {
     @Autowired
     private TransactionCategoryRepository transactionCategoryRepository;
 
-    @Autowired
+   /* @Autowired
     private UserFeignService userFeignService;
-
+*/
 
     public TransactionResponse createTransaction(TransactionData data, long userId) {
         TransactionType transactionType = TransactionType.getTransactionTypeByOrdinal(data.getTypeOrdinal());
@@ -37,7 +32,7 @@ public class TransactionService {
                 data.getName(), data.getSum(), transactionType, transactionCategory
         );
         transactionRepository.save(transaction);
-        userFeignService.addTransactionToUser(userId, transaction.getId());
+        // userFeignService.addTransactionToUser(userId, transaction.getId());
         return new TransactionResponse(transaction);
     }
 
@@ -46,8 +41,8 @@ public class TransactionService {
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND")));
     }
 
-    public List<TransactionResponse> getTransactionsByUserId(long userId) {
-        ResponseEntity<List<Long>> response = userFeignService.getTransactionsIdByUserId(userId);
+  /*  public List<TransactionResponse> getTransactionsByUserId(long userId) {
+     //   ResponseEntity<List<Long>> response = userFeignService.getTransactionsIdByUserId(userId);
         List<TransactionResponse> responses = new ArrayList<>();
 
         List<Transaction> transactions = transactionRepository.findAllByIdIn(response.getBody());
@@ -56,7 +51,7 @@ public class TransactionService {
         }
 
         return responses;
-    }
+    }*/
 
     public TransactionResponse updateTransactionById(long id, TransactionData data) {
         Transaction transaction = transactionRepository.findById(id)
@@ -80,7 +75,7 @@ public class TransactionService {
         transactionRepository.deleteById(id);
     }
 
-    public void deleteAllTransactionsByIds(TransactionIdsList data){
+    public void deleteAllTransactionsByIds(TransactionIdsList data) {
         transactionRepository.deleteAllByIdIn(data.getTransactionIds());
     }
 }

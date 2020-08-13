@@ -28,10 +28,10 @@ public class TransactionController {
         return new ResponseEntity(transactionService.getTransactionById(transactionId), HttpStatus.OK);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/users/{userId}")
+   /* @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/users/{userId}")
     public ResponseEntity getTransactionsByUserId(@PathVariable("userId") long userId) {
         return new ResponseEntity(transactionService.getTransactionsByUserId(userId), HttpStatus.OK);
-    }
+    }*/
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{transactionId}")
     public ResponseEntity updateTransactionById(@PathVariable("transactionId") long transactionId,
