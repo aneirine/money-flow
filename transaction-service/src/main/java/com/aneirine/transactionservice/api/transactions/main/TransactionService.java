@@ -80,7 +80,9 @@ public class TransactionService {
         transactionRepository.deleteById(id);
     }
 
-    public void deleteAllTransactionsByIds(TransactionIdsList data){
+    public void deleteAllTransactionsByIds(TransactionIdsList data) {
         transactionRepository.deleteAllByIdIn(data.getTransactionIds());
     }
+
+
 }

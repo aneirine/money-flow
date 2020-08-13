@@ -46,9 +46,11 @@ public class TransactionController {
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteTransactionById(@RequestBody TransactionIdsList data) {
+    public ResponseEntity deleteAllTransactionsByIds(@RequestBody TransactionIdsList data) {
         transactionService.deleteAllTransactionsByIds(data);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+
 
 }
