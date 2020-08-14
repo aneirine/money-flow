@@ -1,3 +1,3 @@
 # Money-Flow
-#### 
-Program for tracking income / expenses and budget planning
+##### Program for tracking income / expenses and budget planning
+
