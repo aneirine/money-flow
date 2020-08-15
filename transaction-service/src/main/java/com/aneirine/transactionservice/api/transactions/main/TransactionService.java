@@ -34,7 +34,7 @@ public class TransactionService {
         TransactionCategory transactionCategory = transactionCategoryRepository.findById(data.getCategoryId())
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_CATEGORY_NOT_FOUND"));
         Transaction transaction = new Transaction(
-                data.getName(), data.getSum(), transactionType, transactionCategory
+                data.getName(), data.getSum(), transactionType.ordinal(), transactionCategory
         );
         transactionRepository.save(transaction);
         userFeignService.addTransactionToUser(userId, transaction.getId());
@@ -65,7 +65,7 @@ public class TransactionService {
         TransactionCategory transactionCategory = transactionCategoryRepository.findById(data.getCategoryId())
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_CATEGORY_NOT_FOUND"));
 
-        transaction.setTransactionType(transactionType);
+        transaction.setTransactionType(transactionType.ordinal());
         transaction.setTransactionCategory(transactionCategory);
         transaction.setSum(data.getSum());
         transaction.setName(data.getName());

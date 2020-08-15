@@ -15,7 +15,7 @@ public class TransactionResponse {
     public TransactionResponse(Transaction transaction) {
         this.name = transaction.getName();
         this.sum = transaction.getSum();
-        this.transactionType = transaction.getTransactionType();
+        this.transactionType = TransactionType.getTransactionTypeByOrdinal(transaction.getTransactionType());
         this.categoryName = transaction.getTransactionCategory().getName();
     }
 }
