@@ -21,13 +21,13 @@ public class Transaction {
 
     private String name;
     private double sum;
-    private TransactionType transactionType;
+    private int transactionType;
 
     @ManyToOne
     private TransactionCategory transactionCategory;
 
 
-    public Transaction(String name, double sum, TransactionType transactionType, TransactionCategory transactionCategory) {
+    public Transaction(String name, double sum, int transactionType, TransactionCategory transactionCategory) {
         this.name = name;
         this.sum = sum;
         this.transactionType = transactionType;
