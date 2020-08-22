@@ -1,6 +1,7 @@
 package com.aneirine.jarservice.exceptions.handler;
 
 
+import com.aneirine.jarservice.exceptions.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 
-import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,17 +34,7 @@ public class GenericExceptionHandler {
         return new ResponseEntity<>(errors, BAD_REQUEST);
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    public ResponseEntity handleResourceNotFoundException(ConstraintViolationException e) {
-        Map<String, String> errors = new HashMap<>();
-        e.getConstraintViolations().forEach((error) -> {
-            String fieldName = error.getPropertyPath().toString();
-            String errorMessage = error.getMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return new ResponseEntity(errors, BAD_REQUEST);
-    }
+
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Object> handleNotFoundException(NotFoundException exception, WebRequest request) {
