@@ -31,4 +31,14 @@ public class Jar {
     private double sumCurrent;
 
 
+    public Jar(String aim, Date startDate, Date endDate,
+               JarStatus status, String description, double sumGoal, double sumCurrent) {
+        this.aim = aim;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.description = description;
+        this.sumGoal = sumGoal;
+        this.sumCurrent = sumCurrent;
+    }
 }
