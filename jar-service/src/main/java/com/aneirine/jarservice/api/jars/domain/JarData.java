@@ -8,7 +8,7 @@ public class JarData {
     private String aim;
     private String startDate;
     private String endDate;
-    private int statusJar;
+    private int statusOrdinal;
     private String description;
     private double sumGoal;
 
