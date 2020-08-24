@@ -1,4 +1,4 @@
-package com.aneirine.jarservice;
+package com.aneirine.moneyflow;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
