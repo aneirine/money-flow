@@ -1,4 +1,7 @@
 package com.aneirine.moneyflow.api.jars;
 
-public interface JarRepository {
+import com.aneirine.moneyflow.entities.Jar;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface JarRepository  extends JpaRepository<Jar, Long> {
 }
