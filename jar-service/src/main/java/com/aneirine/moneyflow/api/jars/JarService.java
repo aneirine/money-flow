@@ -16,4 +16,12 @@ public class JarService {
     public JarResponse createJar(JarData data) {
         return null;
     }
+
+    public JarResponse getJarById(long id) {
+        return null;
+    }
+
+    public JarResponse updateJarById(JarData data, long id) {
+        return null;
+    }
 }
