@@ -1,5 +1,6 @@
 package com.aneirine.moneyflow.entities;
 
+import com.aneirine.moneyflow.entities.enums.JarStatus;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
