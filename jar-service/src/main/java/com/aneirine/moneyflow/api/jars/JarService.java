@@ -7,6 +7,9 @@ import com.aneirine.moneyflow.entities.enums.JarStatus;
 import com.aneirine.moneyflow.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class JarService {
 
@@ -33,7 +36,14 @@ public class JarService {
     public JarResponse getJarById(long id) {
         return new JarResponse(jarRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("JAR_NOT_FOUND")));
+    }
 
+    public List<JarResponse> getJarsByIds(List<Long> list) {
+        List<Jar> jars = jarRepository.findAllByIdIn(list);
+        List<JarResponse> responses = jars.stream()
+                .map(JarResponse::new)
+                .collect(Collectors.toList());
+        return responses;
     }
 
     public JarResponse updateJarById(JarData data, long id) {
@@ -46,6 +56,12 @@ public class JarService {
 
         jarRepository.save(jar);
         return new JarResponse(jar);
+    }
+
+    public void deleteJarById(long id){
+        jarRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("JAR_NOT_FOUND"));
+        jarRepository.deleteById(id);
     }
 
 
