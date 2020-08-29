@@ -1,10 +1,7 @@
 package com.aneirine.moneyflow.entities;
 
 import com.aneirine.moneyflow.entities.enums.JarStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import javax.persistence.Entity;
@@ -16,6 +13,7 @@ import javax.persistence.Table;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "jars")
 public class Jar {
