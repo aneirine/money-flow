@@ -30,7 +30,10 @@ public class JarService {
     }
 
     public JarResponse getJarById(long id) {
-        return null;
+        /*return jarRepository.findById(id)
+                .orElseThrow(() -> new ChangeSetPersister.NotFoundException("JAR_NOT_FOUND"));
+    }*/
+    return null;
     }
 
     public JarResponse updateJarById(JarData data, long id) {

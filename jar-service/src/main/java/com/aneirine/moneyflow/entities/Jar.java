@@ -2,12 +2,8 @@ package com.aneirine.moneyflow.entities;
 
 import com.aneirine.moneyflow.entities.enums.JarStatus;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
