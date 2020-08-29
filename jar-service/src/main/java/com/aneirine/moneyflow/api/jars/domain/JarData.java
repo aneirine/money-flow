@@ -6,4 +6,7 @@ import lombok.Getter;
 public class JarData {
 
     private String name;
+    private long endDate;
+    private double goalSum;
+    private String description;
 }
