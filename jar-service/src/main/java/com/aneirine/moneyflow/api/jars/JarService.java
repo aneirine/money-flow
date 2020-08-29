@@ -4,6 +4,7 @@ import com.aneirine.moneyflow.api.jars.domain.JarData;
 import com.aneirine.moneyflow.api.jars.domain.JarResponse;
 import com.aneirine.moneyflow.entities.Jar;
 import com.aneirine.moneyflow.entities.enums.JarStatus;
+import com.aneirine.moneyflow.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,13 +31,22 @@ public class JarService {
     }
 
     public JarResponse getJarById(long id) {
-        /*return jarRepository.findById(id)
-                .orElseThrow(() -> new ChangeSetPersister.NotFoundException("JAR_NOT_FOUND"));
-    }*/
-    return null;
+        return new JarResponse(jarRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("JAR_NOT_FOUND")));
+
     }
 
     public JarResponse updateJarById(JarData data, long id) {
-        return null;
+        Jar jar = jarRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("JAR_NOT_FOUND"));
+        jar.setName(data.getName());
+        jar.setDescription(data.getDescription());
+        jar.setGoalSum(data.getGoalSum());
+        jar.setEndDate(data.getEndDate());
+
+        jarRepository.save(jar);
+        return new JarResponse(jar);
     }
+
+
 }
