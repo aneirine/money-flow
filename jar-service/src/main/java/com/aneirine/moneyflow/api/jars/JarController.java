@@ -1,6 +1,7 @@
 package com.aneirine.moneyflow.api.jars;
 
 import com.aneirine.moneyflow.api.jars.domain.JarData;
+import com.aneirine.moneyflow.api.jars.domain.JarIdListData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,9 +27,20 @@ public class JarController {
         return new ResponseEntity(jarService.getJarById(id), HttpStatus.OK);
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getJarsByIds(@RequestBody JarIdListData data) {
+        return new ResponseEntity(jarService.getJarsByIds(data.getList()), HttpStatus.OK);
+    }
+
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
     public ResponseEntity updateJarById(@RequestBody JarData data,
-                                        @PathVariable("id") long id){
+                                        @PathVariable("id") long id) {
         return new ResponseEntity(jarService.updateJarById(data, id), HttpStatus.OK);
+    }
+
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
+    public ResponseEntity deleteJarById(@PathVariable("id") long id) {
+        jarService.deleteJarById(id);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
