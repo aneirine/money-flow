@@ -25,4 +25,11 @@ public class Jar {
 
 
     private String name;
+    private long startDate;
+    private long endDate;
+    private JarStatus status;
+    private double currentSum;
+    private double goalSum;
+    private String description;
+
 }
