@@ -1,8 +1,10 @@
 package com.aneirine.moneyflow.api.jars.domain;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class JarData {
 
     private String name;
