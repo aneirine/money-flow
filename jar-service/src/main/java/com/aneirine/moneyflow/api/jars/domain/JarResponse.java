@@ -2,7 +2,15 @@ package com.aneirine.moneyflow.api.jars.domain;
 
 import com.aneirine.moneyflow.entities.Jar;
 import com.aneirine.moneyflow.entities.enums.JarStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class JarResponse {
 
     private long id;
