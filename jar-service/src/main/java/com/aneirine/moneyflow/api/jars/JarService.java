@@ -20,7 +20,6 @@ public class JarService {
     }
 
     public JarResponse createJar(JarData data) {
-
         Jar jar = Jar.builder()
                 .name(data.getName())
                 .status(JarStatus.ACTIVE)
@@ -31,7 +30,6 @@ public class JarService {
                 .goalSum(data.getGoalSum())
                 .build();
         jarRepository.save(jar);
-        System.out.println(jar.toString());
         return new JarResponse(jar);
     }
 
