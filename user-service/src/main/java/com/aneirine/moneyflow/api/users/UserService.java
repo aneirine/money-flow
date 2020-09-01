@@ -75,4 +75,10 @@ public class UserService {
     }
 
 
+    public void addJarToUser(long userId, long jarId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
+        user.addJar(jarId);
+        userRepository.save(user);
+    }
 }

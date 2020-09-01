@@ -32,6 +32,12 @@ public class UserController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions")
     public ResponseEntity<List<Long>> getTransactionsIdByUserId(@PathVariable("userId") long userId) {
         return new ResponseEntity(userService.getTransactionsIdByUserId(userId), HttpStatus.OK);
+    }
 
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/jars/{jarId}")
+    public ResponseEntity addJarToUser(@PathVariable("userId") long userId,
+                                               @PathVariable("jarId") long jarId) {
+        userService.addJarToUser(userId, jarId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
