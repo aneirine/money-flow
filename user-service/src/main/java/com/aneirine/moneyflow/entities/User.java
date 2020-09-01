@@ -17,7 +17,8 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+
     private long id;
 
     private String username;
@@ -28,6 +29,9 @@ public class User {
     @ElementCollection
     private List<Long> transactionIdList;
 
+    @ElementCollection
+    private List<Long> jarIdList;
+
     public void addTransaction(long transactionId){
         this.transactionIdList.add(transactionId);
     }
@@ -35,5 +39,14 @@ public class User {
     public void removeTransaction(long transactionId){
         this.transactionIdList.remove(transactionId);
     }
+
+    public void addJar(long jarId){
+        this.jarIdList.add(jarId);
+    }
+
+    public void removeJar(long jarId){
+        this.jarIdList.remove(jarId);
+    }
+
 
 }
