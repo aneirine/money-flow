@@ -17,9 +17,12 @@ public class JarController {
         this.jarService = jarService;
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createJar(@RequestBody JarData data) {
-        return new ResponseEntity(jarService.createJar(data), HttpStatus.CREATED);
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            path = "/users/{userId}")
+    public ResponseEntity createJar(@RequestBody JarData data,
+                                    @PathVariable("userId") long userId) {
+        return new ResponseEntity(jarService.createJar(data, userId), HttpStatus.CREATED);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")

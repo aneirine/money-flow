@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity createPerson(@RequestBody UserData userData) {
+    public ResponseEntity createUser(@RequestBody UserData userData) {
         return new ResponseEntity(userService.createUser(userData), HttpStatus.OK);
     }
 
@@ -28,15 +28,19 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions")
     public ResponseEntity<List<Long>> getTransactionsIdByUserId(@PathVariable("userId") long userId) {
         return new ResponseEntity(userService.getTransactionsIdByUserId(userId), HttpStatus.OK);
     }
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}")
+    public ResponseEntity getUserById(@PathVariable("userId") long userId) {
+        return new ResponseEntity(userService.getUserById(userId), HttpStatus.OK);
+    }
+
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/jars/{jarId}")
     public ResponseEntity addJarToUser(@PathVariable("userId") long userId,
-                                               @PathVariable("jarId") long jarId) {
+                                       @PathVariable("jarId") long jarId) {
         userService.addJarToUser(userId, jarId);
         return new ResponseEntity(HttpStatus.OK);
     }

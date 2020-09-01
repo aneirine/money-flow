@@ -1,5 +1,6 @@
 package com.aneirine.moneyflow.api.jars;
 
+import com.aneirine.moneyflow.api.feign.UserFeignService;
 import com.aneirine.moneyflow.api.jars.domain.JarData;
 import com.aneirine.moneyflow.api.jars.domain.JarResponse;
 import com.aneirine.moneyflow.entities.Jar;
@@ -14,12 +15,19 @@ import java.util.stream.Collectors;
 public class JarService {
 
     private final JarRepository jarRepository;
+    private final UserFeignService userFeignService;
 
-    public JarService(JarRepository jarRepository) {
+    public JarService(JarRepository jarRepository, UserFeignService userFeignService) {
         this.jarRepository = jarRepository;
+        this.userFeignService = userFeignService;
     }
 
-    public JarResponse createJar(JarData data) {
+    public JarResponse createJar(JarData data, long userId) {
+        try {
+            userFeignService.getUserById(userId);
+        } catch (Exception e){
+            throw new NotFoundException("USER_NOT_FOUND");
+        }
         Jar jar = Jar.builder()
                 .name(data.getName())
                 .status(JarStatus.ACTIVE)
@@ -30,6 +38,7 @@ public class JarService {
                 .goalSum(data.getGoalSum())
                 .build();
         jarRepository.save(jar);
+        userFeignService.addJarToUser(userId, jar.getId());
         return new JarResponse(jar);
     }
 
