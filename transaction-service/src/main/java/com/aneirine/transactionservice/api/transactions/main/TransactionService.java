@@ -9,7 +9,6 @@ import com.aneirine.transactionservice.entities.Transaction;
 import com.aneirine.transactionservice.entities.TransactionCategory;
 import com.aneirine.transactionservice.entities.TransactionType;
 import com.aneirine.transactionservice.exceptions.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -19,17 +18,20 @@ import java.util.List;
 @Service
 public class TransactionService {
 
-    @Autowired
-    private TransactionRepository transactionRepository;
+    private final TransactionRepository transactionRepository;
+    private final TransactionCategoryRepository transactionCategoryRepository;
+    private final UserFeignService userFeignService;
 
-    @Autowired
-    private TransactionCategoryRepository transactionCategoryRepository;
-
-    @Autowired
-    private UserFeignService userFeignService;
+    public TransactionService(TransactionRepository transactionRepository, TransactionCategoryRepository transactionCategoryRepository, UserFeignService userFeignService) {
+        this.transactionRepository = transactionRepository;
+        this.transactionCategoryRepository = transactionCategoryRepository;
+        this.userFeignService = userFeignService;
+    }
 
 
     public TransactionResponse createTransaction(TransactionData data, long userId) {
+        userFeignService.getUserById(userId);
+
         TransactionType transactionType = TransactionType.getTransactionTypeByOrdinal(data.getTypeOrdinal());
         TransactionCategory transactionCategory = transactionCategoryRepository.findById(data.getCategoryId())
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_CATEGORY_NOT_FOUND"));
