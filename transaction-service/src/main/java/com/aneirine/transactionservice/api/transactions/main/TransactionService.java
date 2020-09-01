@@ -30,7 +30,11 @@ public class TransactionService {
 
 
     public TransactionResponse createTransaction(TransactionData data, long userId) {
-        userFeignService.getUserById(userId);
+        try {
+            userFeignService.getUserById(userId);
+        } catch (Exception e) {
+            throw new NotFoundException("USER_NOT_FOUND");
+        }
 
         TransactionType transactionType = TransactionType.getTransactionTypeByOrdinal(data.getTypeOrdinal());
         TransactionCategory transactionCategory = transactionCategoryRepository.findById(data.getCategoryId())
