@@ -7,7 +7,6 @@ import com.aneirine.jarservice.api.users.domain.UserResponse;
 import com.aneirine.jarservice.entities.User;
 import com.aneirine.jarservice.exceptions.ConflictException;
 import com.aneirine.jarservice.exceptions.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,11 +15,13 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final TransactionFeignService transactionFeignService;
 
-    @Autowired
-    private TransactionFeignService transactionFeignService;
+    public UserService(UserRepository userRepository, TransactionFeignService transactionFeignService) {
+        this.userRepository = userRepository;
+        this.transactionFeignService = transactionFeignService;
+    }
 
     public UserResponse createUser(UserData data) {
         User user = new User();

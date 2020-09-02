@@ -5,15 +5,16 @@ import com.aneirine.transactionservice.api.transactions.category.domain.Transact
 import com.aneirine.transactionservice.entities.TransactionCategory;
 import com.aneirine.transactionservice.exceptions.ConflictException;
 import com.aneirine.transactionservice.exceptions.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionCategoryService {
 
+    private final TransactionCategoryRepository transactionCategoryRepository;
 
-    @Autowired
-    private TransactionCategoryRepository transactionCategoryRepository;
+    public TransactionCategoryService(TransactionCategoryRepository transactionCategoryRepository) {
+        this.transactionCategoryRepository = transactionCategoryRepository;
+    }
 
     public TransactionCategoryResponse createTransactionCategory(TransactionCategoryData data) {
         TransactionCategory category = new TransactionCategory();
