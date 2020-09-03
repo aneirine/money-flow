@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-public class TransactionServiceApplication {
+public class ExceptionServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TransactionServiceApplication.class, args);
+        SpringApplication.run(ExceptionServiceApplication.class, args);
     }
 
 }
