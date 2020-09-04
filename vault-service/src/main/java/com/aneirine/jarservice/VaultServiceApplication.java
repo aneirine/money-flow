@@ -9,10 +9,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
-public class JarServiceApplication {
+public class VaultServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JarServiceApplication.class, args);
+        SpringApplication.run(VaultServiceApplication.class, args);
     }
 
 }
