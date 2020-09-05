@@ -1,5 +1,7 @@
 package com.aneirine.vaultservice.entities.enums;
 
+import com.aneirine.vaultservice.exceptions.NotFoundException;
+
 public enum VaultType {
     CASH, CARD, ELECTRONIC, OTHER;
 
@@ -9,6 +11,6 @@ public enum VaultType {
                 return temp;
             }
         }
-        throw new NotFou
+        throw new NotFoundException("VAULT_TYPE_NOT_FOUND");
     }
 }

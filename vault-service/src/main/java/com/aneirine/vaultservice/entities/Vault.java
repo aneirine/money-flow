@@ -1,5 +1,6 @@
 package com.aneirine.vaultservice.entities;
 
+import com.aneirine.vaultservice.entities.enums.VaultType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,6 @@ public class Vault {
     private String name;
     private double sum;
     private String description;
+    private VaultType type;
 
 }
