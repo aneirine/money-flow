@@ -54,4 +54,11 @@ public class VaultService {
         vaultRepository.save(vault);
         return new VaultResponse(vault);
     }
+
+    public void deleteVaultById(long id){
+        Vault vault = vaultRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("VAULT_NOT_FOUND"));
+        //remove from user
+        vaultRepository.deleteById(id);
+    }
 }
