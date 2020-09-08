@@ -7,6 +7,9 @@ import com.aneirine.vaultservice.entities.enums.VaultType;
 import com.aneirine.vaultservice.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class VaultService {
 
@@ -33,5 +36,29 @@ public class VaultService {
                 vaultRepository.findById(id)
                         .orElseThrow(() -> new NotFoundException("VAULT_NOT_FOUND"))
         );
+    }
+
+    public List<VaultResponse> getVaultsByUserId(long userId){
+        //soon, after  feign implementation
+        return new ArrayList<>();
+    }
+
+    public VaultResponse updateVaultResponseById(long id, VaultData data){
+        VaultType type = VaultType.getVaultTypeByOrdinal(data.getVaultTypeOrdinal());
+        Vault vault = vaultRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("VAULT_NOT_FOUND"));
+        vault.setDescription(data.getDescription());
+        vault.setName(data.getName());
+        vault.setSum(data.getSum());
+        vault.setType(type);
+        vaultRepository.save(vault);
+        return new VaultResponse(vault);
+    }
+
+    public void deleteVaultById(long id){
+        Vault vault = vaultRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("VAULT_NOT_FOUND"));
+        //remove from user
+        vaultRepository.deleteById(id);
     }
 }
