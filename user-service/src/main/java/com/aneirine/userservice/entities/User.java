@@ -20,17 +20,15 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String username;
-
     @Column(unique = true)
     private String email;
-
     @ElementCollection
     private List<Long> transactionIdList;
-
     @ElementCollection
     private List<Long> jarIdList;
+    @ElementCollection
+    private List<Long> vaultIdList;
 
     public void addTransaction(long transactionId){
         this.transactionIdList.add(transactionId);
