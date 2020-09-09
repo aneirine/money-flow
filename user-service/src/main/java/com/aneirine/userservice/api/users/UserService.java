@@ -61,25 +61,5 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public void addTransactionToUser(long userId, long transactionId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
-        user.addTransaction(transactionId);
-        userRepository.save(user);
-    }
 
-
-    public List<Long> getTransactionsIdByUserId(long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
-        return user.getTransactionIdList();
-    }
-
-
-    public void addJarToUser(long userId, long jarId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
-        user.addJar(jarId);
-        userRepository.save(user);
-    }
 }

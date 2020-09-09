@@ -1,5 +1,6 @@
 package com.aneirine.vaultservice.api.vaults;
 
+import com.aneirine.vaultservice.api.feign.UserFeignService;
 import com.aneirine.vaultservice.api.vaults.domain.VaultData;
 import com.aneirine.vaultservice.api.vaults.domain.VaultResponse;
 import com.aneirine.vaultservice.entities.Vault;
@@ -7,19 +8,27 @@ import com.aneirine.vaultservice.entities.enums.VaultType;
 import com.aneirine.vaultservice.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VaultService {
 
     private final VaultRepository vaultRepository;
+    private final UserFeignService userFeignService;
 
-    public VaultService(VaultRepository vaultRepository) {
+    public VaultService(VaultRepository vaultRepository, UserFeignService userFeignService) {
         this.vaultRepository = vaultRepository;
+        this.userFeignService = userFeignService;
     }
 
     public VaultResponse createVault(VaultData data) {
+        try {
+            userFeignService.getUserById(data.getUserId());
+        } catch (Exception e) {
+            throw new NotFoundException("USER_NOT_FOUND");
+        }
+
         VaultType type = VaultType.getVaultTypeByOrdinal(data.getVaultTypeOrdinal());
         Vault vault = Vault.builder()
                 .name(data.getName())
@@ -28,6 +37,7 @@ public class VaultService {
                 .type(type)
                 .build();
         vaultRepository.save(vault);
+        userFeignService.addVaultToUser(data.getUserId(), vault.getId());
         return new VaultResponse(vault);
     }
 
@@ -38,12 +48,16 @@ public class VaultService {
         );
     }
 
-    public List<VaultResponse> getVaultsByUserId(long userId){
-        //soon, after  feign implementation
-        return new ArrayList<>();
+    public List<VaultResponse> getVaultsByUserId(long userId) {
+        List<Long> list = userFeignService.getVaultsByUserId(userId).getBody();
+        List<Vault> vaults = vaultRepository.findAllByIdIn(list);
+        List<VaultResponse> responses = vaults.stream()
+                .map(VaultResponse::new)
+                .collect(Collectors.toList());
+        return responses;
     }
 
-    public VaultResponse updateVaultResponseById(long id, VaultData data){
+    public VaultResponse updateVaultResponseById(long id, VaultData data) {
         VaultType type = VaultType.getVaultTypeByOrdinal(data.getVaultTypeOrdinal());
         Vault vault = vaultRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("VAULT_NOT_FOUND"));
@@ -55,10 +69,10 @@ public class VaultService {
         return new VaultResponse(vault);
     }
 
-    public void deleteVaultById(long id){
+    public void deleteVaultById(long id) {
         Vault vault = vaultRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("VAULT_NOT_FOUND"));
-        //remove from user
+        userFeignService.removeVaultFromUserById(id);
         vaultRepository.deleteById(id);
     }
 }

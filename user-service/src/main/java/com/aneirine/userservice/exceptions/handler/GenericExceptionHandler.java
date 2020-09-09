@@ -1,7 +1,6 @@
 package com.aneirine.userservice.exceptions.handler;
 
 
-import com.aneirine.jarservice.exceptions.*;
 import com.aneirine.userservice.exceptions.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
