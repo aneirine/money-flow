@@ -82,4 +82,11 @@ public class UserService {
         user.addJar(jarId);
         userRepository.save(user);
     }
+
+    public void addVaultToUser(long userId, long vaultId){
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
+        user.addVault(vaultId);
+        userRepository.save(user);
+    }
 }

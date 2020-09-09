@@ -30,20 +30,28 @@ public class User {
     @ElementCollection
     private List<Long> vaultIdList;
 
-    public void addTransaction(long transactionId){
+    public void addTransaction(long transactionId) {
         this.transactionIdList.add(transactionId);
     }
 
-    public void removeTransaction(long transactionId){
+    public void removeTransaction(long transactionId) {
         this.transactionIdList.remove(transactionId);
     }
 
-    public void addJar(long jarId){
+    public void addJar(long jarId) {
         this.jarIdList.add(jarId);
     }
 
-    public void removeJar(long jarId){
+    public void removeJar(long jarId) {
         this.jarIdList.remove(jarId);
+    }
+
+    public void addVault(long vaultId) {
+        this.vaultIdList.add(vaultId);
+    }
+
+    public void removeVault(long vaultId) {
+        this.vaultIdList.remove(vaultId);
     }
 
 
