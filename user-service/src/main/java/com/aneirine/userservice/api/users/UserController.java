@@ -44,4 +44,11 @@ public class UserController {
         userService.addJarToUser(userId, jarId);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/vaults/{vaultId}")
+    public ResponseEntity addVaultToUser(@PathVariable("userId") long userId,
+                                         @PathVariable("vaultId") long vaultId) {
+        userService.addVaultToUser(userId, vaultId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
