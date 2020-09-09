@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VaultService {
@@ -45,8 +46,12 @@ public class VaultService {
     }
 
     public List<VaultResponse> getVaultsByUserId(long userId){
-        //soon, after  feign implementation
-        return new ArrayList<>();
+        List<Long> list = userFeignService.getVaultsByUserId(userId).getBody();
+        List<Vault> vaults = vaultRepository.findAllByIdIn(list);
+        List<VaultResponse> responses = vaults.stream()
+                .map(VaultResponse::new)
+                .collect(Collectors.toList());
+        return responses;
     }
 
     public VaultResponse updateVaultResponseById(long id, VaultData data){
