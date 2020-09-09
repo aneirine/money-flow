@@ -24,5 +24,8 @@ public interface UserFeignService {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/vaults")
     public ResponseEntity<List<Long>> getVaultsByUserId(@PathVariable("userId") long userId);
 
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/vaults/{vaultId}")
+    public ResponseEntity removeVaultFromUserById(@PathVariable("vaultId") long vaultId);
+
 
 }

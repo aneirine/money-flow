@@ -72,7 +72,7 @@ public class VaultService {
     public void deleteVaultById(long id) {
         Vault vault = vaultRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("VAULT_NOT_FOUND"));
-        //remove from user
+        userFeignService.removeVaultFromUserById(id);
         vaultRepository.deleteById(id);
     }
 }

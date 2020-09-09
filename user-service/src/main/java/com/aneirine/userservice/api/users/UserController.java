@@ -62,4 +62,10 @@ public class UserController {
     public ResponseEntity<List<Long>> getVaultsByUserId(@PathVariable("userId") long userId) {
         return new ResponseEntity(userAdditionalService.getVaultsByUserId(userId), HttpStatus.OK);
     }
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/vaults/{vaultId}")
+    public ResponseEntity removeVaultFromUserById(@PathVariable("vaultId") long vaultId) {
+        userAdditionalService.removeVaultFromUserById(vaultId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }

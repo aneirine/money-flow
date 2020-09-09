@@ -50,9 +50,9 @@ public class UserAdditionalService {
         return user.getVaultIdList();
     }
 
-    public void removeVaultFromUserById(long vaultId){
+    public void removeVaultFromUserById(long vaultId) {
         User user = userRepository.findByVaults(vaultId);
-        if(user == null)throw new NotFoundException("USER_NOT_FOUND");
+        if (user == null) throw new NotFoundException("USER_NOT_FOUND");
         user.removeVault(vaultId);
         userRepository.save(user);
     }
