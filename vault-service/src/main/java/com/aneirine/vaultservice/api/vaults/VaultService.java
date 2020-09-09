@@ -1,10 +1,12 @@
 package com.aneirine.vaultservice.api.vaults;
 
+import com.aneirine.vaultservice.api.feign.UserFeignService;
 import com.aneirine.vaultservice.api.vaults.domain.VaultData;
 import com.aneirine.vaultservice.api.vaults.domain.VaultResponse;
 import com.aneirine.vaultservice.entities.Vault;
 import com.aneirine.vaultservice.entities.enums.VaultType;
 import com.aneirine.vaultservice.exceptions.NotFoundException;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,12 +16,15 @@ import java.util.List;
 public class VaultService {
 
     private final VaultRepository vaultRepository;
+    private final UserFeignService userFeignService;
 
-    public VaultService(VaultRepository vaultRepository) {
+    public VaultService(VaultRepository vaultRepository, UserFeignService userFeignService) {
         this.vaultRepository = vaultRepository;
+        this.userFeignService = userFeignService;
     }
 
     public VaultResponse createVault(VaultData data) {
+        userFeignService.getUserById(data.getUserId());
         VaultType type = VaultType.getVaultTypeByOrdinal(data.getVaultTypeOrdinal());
         Vault vault = Vault.builder()
                 .name(data.getName())
@@ -28,6 +33,7 @@ public class VaultService {
                 .type(type)
                 .build();
         vaultRepository.save(vault);
+        userFeignService.addVaultToUser(data.getUserId(), vault.getId());
         return new VaultResponse(vault);
     }
 

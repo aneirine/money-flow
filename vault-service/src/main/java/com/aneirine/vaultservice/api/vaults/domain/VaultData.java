@@ -9,4 +9,5 @@ public class VaultData {
     private double sum;
     private String description;
     private int vaultTypeOrdinal;
+    private long userId;
 }
