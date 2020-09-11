@@ -61,6 +61,7 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
         transactionFeignService.deleteAllTransactionsByIds(new IdListData(user.getTransactionIdList()));
         jarFeignService.deleteJarsByIds(new IdListData(user.getJarIdList()));
+
         userRepository.delete(user);
     }
 

@@ -1,5 +1,6 @@
 package com.aneirine.vaultservice.api.vaults;
 
+import com.aneirine.vaultservice.api.vaults.domain.IdListData;
 import com.aneirine.vaultservice.api.vaults.domain.VaultData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,23 +23,29 @@ public class VaultController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
-    public ResponseEntity getVaultById(@PathVariable("id") long id){
+    public ResponseEntity getVaultById(@PathVariable("id") long id) {
         return new ResponseEntity(vaultService.getVaultById(id), HttpStatus.OK);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/users/{userId}")
-    public ResponseEntity getVaultsByUserId(@PathVariable("userId") long userId){
+    public ResponseEntity getVaultsByUserId(@PathVariable("userId") long userId) {
         return new ResponseEntity(vaultService.getVaultsByUserId(userId), HttpStatus.OK);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
-    public ResponseEntity updateVaultById(@PathVariable("id") long id, @RequestBody VaultData data){
+    public ResponseEntity updateVaultById(@PathVariable("id") long id, @RequestBody VaultData data) {
         return new ResponseEntity(vaultService.updateVaultResponseById(id, data), HttpStatus.OK);
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
-    public ResponseEntity deleteVaultById(@PathVariable("id") long id){
+    public ResponseEntity deleteVaultById(@PathVariable("id") long id) {
         vaultService.deleteVaultById(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteVaultsById(@RequestBody IdListData data) {
+        vaultService.deleteVaultsByIds(data.getList());
         return new ResponseEntity(HttpStatus.OK);
     }
 }
