@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class TransactionIdsList {
+public class IdListData {
 
-    private List<Long> transactionIds;
+    private List<Long> list;
 }

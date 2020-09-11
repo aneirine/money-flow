@@ -75,4 +75,8 @@ public class VaultService {
         userFeignService.removeVaultFromUserById(id);
         vaultRepository.deleteById(id);
     }
+
+    public void deleteVaultsByIds(List<Long> list){
+        vaultRepository.deleteAllByIdIn(list);
+    }
 }

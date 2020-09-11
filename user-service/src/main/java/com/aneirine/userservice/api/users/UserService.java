@@ -1,26 +1,31 @@
 package com.aneirine.userservice.api.users;
 
+import com.aneirine.userservice.api.feign.JarFeignService;
 import com.aneirine.userservice.api.feign.TransactionFeignService;
-import com.aneirine.userservice.api.users.domain.TransactionIdsList;
+import com.aneirine.userservice.api.feign.VaultFeignService;
+import com.aneirine.userservice.api.users.domain.IdListData;
 import com.aneirine.userservice.api.users.domain.UserData;
 import com.aneirine.userservice.api.users.domain.UserResponse;
-import com.aneirine.userservice.exceptions.NotFoundException;
 import com.aneirine.userservice.entities.User;
 import com.aneirine.userservice.exceptions.ConflictException;
+import com.aneirine.userservice.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final TransactionFeignService transactionFeignService;
+    private final JarFeignService jarFeignService;
+    private final VaultFeignService vaultFeignService;
 
-    public UserService(UserRepository userRepository, TransactionFeignService transactionFeignService) {
+    public UserService(UserRepository userRepository, TransactionFeignService transactionFeignService, JarFeignService jarFeignService, VaultFeignService vaultFeignService) {
         this.userRepository = userRepository;
         this.transactionFeignService = transactionFeignService;
+        this.jarFeignService = jarFeignService;
+        this.vaultFeignService = vaultFeignService;
     }
 
     public UserResponse createUser(UserData data) {
@@ -57,7 +62,9 @@ public class UserService {
     public void deleteUserById(long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("USER_NOT_FOUND"));
-        transactionFeignService.deleteAllTransactionsByIds(new TransactionIdsList(user.getTransactionIdList()));
+        transactionFeignService.deleteAllTransactionsByIds(new IdListData(user.getTransactionIdList()));
+        jarFeignService.deleteJarsByIds(new IdListData(user.getJarIdList()));
+        vaultFeignService.deleteVaultsById(new IdListData(user.getVaultIdList()));
         userRepository.delete(user);
     }
 

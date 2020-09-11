@@ -75,4 +75,8 @@ public class JarService {
     }
 
 
+    public void deleteJarsByIds(List<Long> list) {
+        List<Jar> jars = jarRepository.findAllByIdIn(list);
+        jarRepository.deleteAll(jars);
+    }
 }

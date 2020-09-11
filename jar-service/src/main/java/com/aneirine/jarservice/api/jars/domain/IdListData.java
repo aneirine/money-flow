@@ -5,7 +5,7 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-public class JarIdListData {
+public class IdListData {
 
     private List<Long> list;
 

@@ -3,7 +3,6 @@ package com.aneirine.exceptionservice.api.transactions.main;
 import com.aneirine.exceptionservice.api.feign.UserFeignService;
 import com.aneirine.exceptionservice.api.transactions.category.TransactionCategoryRepository;
 import com.aneirine.exceptionservice.api.transactions.main.domain.TransactionData;
-import com.aneirine.exceptionservice.api.transactions.main.domain.TransactionIdsList;
 import com.aneirine.exceptionservice.api.transactions.main.domain.TransactionResponse;
 import com.aneirine.exceptionservice.entities.Transaction;
 import com.aneirine.exceptionservice.entities.TransactionCategory;
@@ -86,8 +85,8 @@ public class TransactionService {
         transactionRepository.deleteById(id);
     }
 
-    public void deleteAllTransactionsByIds(TransactionIdsList data) {
-        transactionRepository.deleteAllByIdIn(data.getTransactionIds());
+    public void deleteAllTransactionsByIds(List<Long> list) {
+        transactionRepository.deleteAllByIdIn(list);
     }
 
 

@@ -1,7 +1,7 @@
 package com.aneirine.jarservice.api.jars;
 
+import com.aneirine.jarservice.api.jars.domain.IdListData;
 import com.aneirine.jarservice.api.jars.domain.JarData;
-import com.aneirine.jarservice.api.jars.domain.JarIdListData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +31,7 @@ public class JarController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getJarsByIds(@RequestBody JarIdListData data) {
+    public ResponseEntity getJarsByIds(@RequestBody IdListData data) {
         return new ResponseEntity(jarService.getJarsByIds(data.getList()), HttpStatus.OK);
     }
 
@@ -45,5 +45,12 @@ public class JarController {
     public ResponseEntity deleteJarById(@PathVariable("id") long id) {
         jarService.deleteJarById(id);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity deleteJarsByIds(@RequestBody IdListData data) {
+        jarService.deleteJarsByIds(data.getList());
+        return new ResponseEntity(HttpStatus.OK);
+
     }
 }

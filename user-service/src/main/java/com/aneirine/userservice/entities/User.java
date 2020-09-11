@@ -23,6 +23,7 @@ public class User {
     private String username;
     @Column(unique = true)
     private String email;
+
     @ElementCollection
     private List<Long> transactionIdList;
     @ElementCollection

@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,16 @@ public class UserController {
         return new ResponseEntity(userService.getUserById(userId), HttpStatus.OK);
     }
 
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
+    public ResponseEntity updateUserById(@RequestBody UserData data, @PathVariable("id") long id) {
+        return new ResponseEntity(userService.updateUserById(id, data), HttpStatus.OK);
+    }
+
+    @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
+    public ResponseEntity deleteUserById(@PathVariable("id") long id){
+        userService.deleteUserById(id);
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}/transactions/{transactionId}")
     public ResponseEntity addTransactionToUser(@PathVariable("userId") long userId,
@@ -68,4 +79,6 @@ public class UserController {
         userAdditionalService.removeVaultFromUserById(vaultId);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+
 }
