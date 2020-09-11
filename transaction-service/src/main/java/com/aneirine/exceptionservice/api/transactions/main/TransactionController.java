@@ -1,7 +1,7 @@
 package com.aneirine.exceptionservice.api.transactions.main;
 
 import com.aneirine.exceptionservice.api.transactions.main.domain.TransactionData;
-import com.aneirine.exceptionservice.api.transactions.main.domain.TransactionIdsList;
+import com.aneirine.exceptionservice.api.transactions.main.domain.IdListData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -46,8 +46,8 @@ public class TransactionController {
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity deleteAllTransactionsByIds(@RequestBody TransactionIdsList data) {
-        transactionService.deleteAllTransactionsByIds(data);
+    public ResponseEntity deleteAllTransactionsByIds(@RequestBody IdListData data) {
+        transactionService.deleteAllTransactionsByIds(data.getList());
         return new ResponseEntity(HttpStatus.OK);
     }
 
