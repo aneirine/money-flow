@@ -82,7 +82,7 @@ public class TransactionService {
     public void deleteTransactionById(long id) {
         Transaction transaction = transactionRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("TRANSACTION_NOT_FOUND"));
-
+        userFeignService.removeTransactionFromUserById(id);
         transactionRepository.deleteById(id);
     }
 
