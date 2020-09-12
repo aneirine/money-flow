@@ -1,6 +1,7 @@
 package com.aneirine.exceptionservice.api.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +25,6 @@ public interface UserFeignService {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}")
     public ResponseEntity getUserById(@PathVariable("userId") long userId);
 
-
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/transactions/{transactionId}")
+    public ResponseEntity removeTransactionFromUserById(@PathVariable("transactionId") long transactionId);
 }

@@ -12,4 +12,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select s from User  s where ?1  member of s.vaultIdList ")
     User findByVaults(long id);
+
+    @Query("select s from User  s where ?1  member of s.transactionIdList ")
+    User findByTransactions(long id);
+
+    @Query("select s from User  s where ?1  member of s.jarIdList ")
+    User findByJars(long id);
 }
