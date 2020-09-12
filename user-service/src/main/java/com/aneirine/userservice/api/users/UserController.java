@@ -80,5 +80,17 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/transactions/{transactionId}")
+    public ResponseEntity removeTransactionFromUserById(@PathVariable("transactionId") long transactionId) {
+        userAdditionalService.removeTransactionFromUserById(transactionId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/jars/{jarId}")
+    public ResponseEntity removeJarFromUserById(@PathVariable("jarId") long jarId) {
+        userAdditionalService.removeJarFromUserById(jarId);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
 }

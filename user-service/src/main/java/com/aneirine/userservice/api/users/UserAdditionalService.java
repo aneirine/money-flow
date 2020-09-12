@@ -57,7 +57,7 @@ public class UserAdditionalService {
         userRepository.save(user);
     }
 
-    public void removeTransactionFromUserById(long transactionId){
+    public void removeTransactionFromUserById(long transactionId) {
         User user = userRepository.findByTransactions(transactionId);
         if (user == null) throw new NotFoundException("USER_NOT_FOUND");
         user.removeTransaction(transactionId);
@@ -65,12 +65,11 @@ public class UserAdditionalService {
 
     }
 
-    public void removeJarFromUserById(long jarId){
+    public void removeJarFromUserById(long jarId) {
         User user = userRepository.findByJars(jarId);
         if (user == null) throw new NotFoundException("USER_NOT_FOUND");
         user.removeJar(jarId);
         userRepository.save(user);
-
     }
 
 }
