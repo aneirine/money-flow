@@ -65,4 +65,12 @@ public class UserAdditionalService {
 
     }
 
+    public void removeJarFromUserById(long jarId){
+        User user = userRepository.findByJars(jarId);
+        if (user == null) throw new NotFoundException("USER_NOT_FOUND");
+        user.removeJar(jarId);
+        userRepository.save(user);
+
+    }
+
 }
