@@ -19,5 +19,8 @@ public interface UserFeignService {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/{userId}")
     public ResponseEntity getUserById(@PathVariable("userId") long userId);
 
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE, path = "/jars/{jarId}")
+    public ResponseEntity removeJarFromUserById(@PathVariable("jarId") long jarId);
 
-}
+
+    }

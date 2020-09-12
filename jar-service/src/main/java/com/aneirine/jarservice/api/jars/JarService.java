@@ -71,6 +71,7 @@ public class JarService {
     public void deleteJarById(long id){
         jarRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("JAR_NOT_FOUND"));
+        userFeignService.removeJarFromUserById(id);
         jarRepository.deleteById(id);
     }
 
